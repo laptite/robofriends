@@ -14,16 +14,15 @@ class App extends Component {
 		}
 	}
 
-	componentDidMount() {
-		fetch('https://jsonplaceholder.typicode.com/users')
-			.then(response => response.json())
-			.then(users => this.setState({ robots: users }))
-	}
+	async componentDidMount() {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+    const users = await response.json();
+    this.setState({ robots: users });
+  }
 
 	onSearchChange = (event) => {
 		this.setState({ searchfield: event.target.value })
 	}
-
 	render() {
 		const { robots, searchfield } = this.state
 		const filteredRobots = robots.filter(robot => {
